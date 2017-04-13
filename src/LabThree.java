@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.lang.*;
+import java.lang.Math;
 
 /**
  * Displays a number of powers for
@@ -23,22 +23,50 @@ public class LabThree {
 
 
         do {
+
+            // collects the integer from the user
             System.out.print("Please enter an integer: ");
             userInput = scnr.nextInt();
             System.out.println();
 
-            System.out.println("Number\t\tSquared\t\tCubed");
-            System.out.println("======\t\t======\t\t======");
+            // converts last column's cube to a string
+            String lastCube = Integer.toString((int)Math.pow((double)userInput, 3.0));
+            // gets that string's length
+            int lastCubeLength;
+            if (lastCube.length() < 7) {
+                lastCubeLength = 8;
+            }
+            else {
+                lastCubeLength = lastCube.length();
+            }
 
+            // prints the header to the table
+            System.out.printf("%-" + lastCubeLength + "s\t\t%-" + lastCubeLength + "s\t\t%-" + lastCubeLength + "s\n", "Base", "Squared", "Cubed");
+            System.out.printf("%-" + lastCubeLength + "s\t\t%-" + lastCubeLength + "s\t\t%-" + lastCubeLength + "s\n", "========", "========", "========");
+
+            // initializes my array
             myPowerArray = new int[userInput][3];
 
+            // prints the base number, square, and cube
             for(int i = 0; i < userInput; i++) {
+
+                // baseNum will increment along with i, but will start at 1 and not 0
                 baseNum = i + 1;
+
+                // defines column i, row 1
                 myPowerArray[i][0] = baseNum;
+                //defines column i, row 2
+                //takes baseNum, explicitly converts this to a double using the (double) prefix
+                //uses Math.pow(double, double) to bring baseNum to the power of 2.0
+                //converts this "square" back to an integer with (int) prefix
                 myPowerArray[i][1] = (int)Math.pow((double)baseNum, 2.0);
+                //repeats this process with exponent 3.0 to create a "cube"
                 myPowerArray[i][2] = (int)Math.pow((double)baseNum, 3.0);
-                System.out.println(myPowerArray[i][0] + "\t\t\t" + myPowerArray[i][1] + "\t\t\t" + myPowerArray[i][2]);
+
+                System.out.printf("%-" + lastCubeLength + "d\t\t%-" + lastCubeLength + "d\t\t%-" + lastCubeLength + "d\n", myPowerArray[i][0], myPowerArray[i][1], myPowerArray[i][2]);
             }
+
+
 
             System.out.println();
             System.out.print("Do you want to go again?: ");
