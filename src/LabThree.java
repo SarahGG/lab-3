@@ -9,22 +9,52 @@ import java.lang.Math;
  *
  * @author Sarah Guarino
  * @author Marin Bizbiqi
- * @version 1.0
+ * @version 1.1
  */
 public class LabThree {
     private static Scanner scnr = new Scanner(System.in);
+    private static boolean doAgain = false;
+    private static boolean correctInput;
+    private static char userContinueCheck = 'z';
+    
+    private static void checkInput() {
+        boolean correctInput;
+        char userContinueCheck = 'z';
+        
+        do {
+            // collects input the first character (a-z regardless of case)
+            // switches to lowercase
+            userContinueCheck = Character.toLowerCase(scnr.next("[a-zA-Z]").charAt(0));
+            
+            if (userContinueCheck == 'y') {
+                correctInput = true;
+                doAgain = true;
+            }
+            else if (userContinueCheck == 'n') {
+                correctInput = true;
+                doAgain = false;
+                System.out.println("Goodbye!");
+            }
+            else if (userContinueCheck == 'z') {
+                // this is my initialized test value - if I get this, I messed something up
+                System.out.println("Something went wrong with your switch!");
+                correctInput = false;
+            }
+            else {
+                System.out.println("Incorrect input, please try again!");
+                correctInput = false;
+            }
+        }
+        // only repeats if user input y or n
+        while(!correctInput);
+    }
 
     public static void main(String[] args) {
         int userInput = -1;
         int baseNum;
         int[][] myPowerArray;
-        boolean doAgain = false;
-        boolean correctInput;
-        char userContinueCheck = 'z';
-
-
+        
         do {
-
             // collects the integer from the user
             System.out.print("Please enter an integer: ");
             userInput = scnr.nextInt();
@@ -34,7 +64,8 @@ public class LabThree {
             String lastCube = Integer.toString((int)Math.pow((double)userInput, 3.0));
             // gets that string's length
             int lastCubeLength;
-            if (lastCube.length() < 7) {
+            // if strings length is shorter than my longest title item, make it that instead
+            if (lastCube.length() < 8) {
                 lastCubeLength = 8;
             }
             else {
@@ -64,43 +95,15 @@ public class LabThree {
                 //repeats this process with exponent 3.0 to create a "cube"
                 myPowerArray[i][2] = (int)Math.pow((double)baseNum, 3.0);
 
+                //prints my base, square, and cube in the appropriate formatting
                 System.out.printf("%-" + lastCubeLength + "d\t\t%-" + lastCubeLength + "d\t\t%-" + lastCubeLength + "d\n", myPowerArray[i][0], myPowerArray[i][1], myPowerArray[i][2]);
             }
-
-
-
+            
             System.out.println();
             System.out.print("Do you want to go again?: ");
-            do {
-                // collects input the first character (a-z regardless of case), and switches to lowercase
-                userContinueCheck = Character.toLowerCase(scnr.next("[a-zA-Z]").charAt(0));
-
-                switch (userContinueCheck) {
-                    case 'y':
-                        correctInput = true;
-                        doAgain = true;
-
-                        break;
-                    case 'n':
-                        correctInput = true;
-                        doAgain = false;
-                        System.out.println("Goodbye!");
-
-                        break;
-                    case 'z':
-                        System.out.println("Something went wrong with your switch!");
-                        correctInput = false;
-                        break;
-
-                    default:
-                        System.out.println("Incorrect input, please try again!");
-                        correctInput = false;
-
-                        break;
-                }
-            }
-            while(!correctInput);
+            checkInput();
         }
+        // only repeats if user input y
         while(doAgain);
     }
 }
