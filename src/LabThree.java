@@ -8,6 +8,7 @@ import java.lang.Math;
  * user
  *
  * @author Sarah Guarino
+ * @author Marin Bizbiqi
  * @version 1.0
  */
 public class LabThree {
