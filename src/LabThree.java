@@ -19,7 +19,7 @@ public class LabThree {
         int[][] myPowerArray;
         boolean doAgain = false;
         boolean correctInput;
-        char startOver = 'z';
+        char userContinueCheck = 'z';
 
 
         do {
@@ -72,9 +72,9 @@ public class LabThree {
             System.out.print("Do you want to go again?: ");
             do {
                 // collects input the first character (a-z regardless of case), and switches to lowercase
-                startOver = Character.toLowerCase(scnr.next("[a-zA-Z]").charAt(0));
+                userContinueCheck = Character.toLowerCase(scnr.next("[a-zA-Z]").charAt(0));
 
-                switch (startOver) {
+                switch (userContinueCheck) {
                     case 'y':
                         correctInput = true;
                         doAgain = true;
